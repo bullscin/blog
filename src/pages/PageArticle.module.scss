@@ -1,0 +1,146 @@
+@import 'src/default-style/style.module.scss';
+
+.article {
+  display: flex;
+  flex-direction: column;
+  max-width: 938px;
+  min-height: 140px;
+  margin: 0 auto;
+  padding: 15px 16px 24px;
+  margin-bottom: 26px;
+  background-color: $background-color-item;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+
+  &__header {
+    max-width: 938px;
+    display: flex;
+    gap: 85px;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+
+  &__title {
+    align-items: center;
+    max-height: 60px;
+
+    &-top {
+      display: flex;
+      margin-bottom: 4px;
+    }
+
+    h2 {
+      color: rgb(24, 144, 255);
+      height: 28px;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 28px;
+      font-weight: 500;
+    }
+  }
+
+  &__like {
+    align-items: center;
+    display: flex;
+    gap: 5px;
+
+    &-icon {
+      width: 16px;
+      height: 16px;
+      margin: 0 5px 0 10px;
+    }
+    span {
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 22px;
+    }
+  }
+
+  &__tag-list {
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    gap: 8px;
+    max-width: 686px;
+    overflow: hidden;
+  }
+
+  &__tag {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14.52px;
+    max-width: 110px;
+    max-height: 20px;
+    color: $gray-text-color;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    padding: 2px 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover,
+    &:focus {
+      color: #000000;
+      transition: all 0.3s;
+    }
+  }
+
+  &__avatar {
+    display: flex;
+    gap: 12px;
+    max-width: 160px;
+    max-height: 100px;
+
+    &-container {
+      max-width: 110px;
+      max-height: 70px;
+    }
+
+    img {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+    }
+  }
+
+  &__name {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+
+    max-height: 80px;
+    word-wrap: break-word;
+    overflow: hidden;
+  }
+
+  &__date {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 22px;
+    color: $gray-text-color;
+
+    display: block;
+    margin-right: 5px;
+    word-wrap: break-word;
+  }
+
+  &__description,
+  p {
+    display: block;
+    max-width: 880px;
+    max-height: 45px;
+    margin: 0;
+    overflow: hidden;
+
+    color: rgba(0, 0, 0, 0.75);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 22px;
+    text-align: left;
+  }
+
+  &:hover {
+    transition: all 0.3s;
+    box-shadow: $shadow-color;
+  }
+}

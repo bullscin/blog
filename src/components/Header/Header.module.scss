@@ -1,0 +1,110 @@
+@import 'src/default-style/style.module.scss';
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  min-height: 80px;
+  padding: 0 22px;
+  margin: 0 auto 26px;
+
+  background-color: $background-color-item;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+
+  %hover-btn {
+    color: white;
+    background-color: rgb(82, 196, 26);
+    transition: all 0.3s;
+  }
+  %active-btn {
+    color: black;
+    border: 1px solid rgb(82, 196, 26);
+    transition: all 0.3s;
+  }
+  %focus-btn {
+    color: rgb(82, 196, 26);
+    background-color: $background-color-item;
+    border: 1px solid rgb(82, 196, 26);
+    transition: all 0.3s;
+  }
+
+  h2 {
+    margin-right: auto;
+  }
+  &-btns {
+    display: flex;
+    gap: 19px;
+  }
+
+  .btn-in,
+  .btn-up {
+    width: 109px;
+    height: 51px;
+    color: #000000d9;
+
+    border: none;
+    border-radius: 5px;
+    background-color: $background-color-item;
+    font-size: 18px;
+
+    &:hover {
+      @extend %hover-btn;
+    }
+
+    &:active {
+      @extend %active-btn;
+    }
+
+    &:focus {
+      @extend %focus-btn;
+    }
+  }
+}
+
+//   .name {
+//     color: rgba(0, 0, 0, 0.85);
+//     font-size: 18px;
+//     font-weight: 400;
+//     line-height: 28px;
+//     letter-spacing: 0%;
+//     text-align: left;
+//     margin-left: 30px;
+//     margin-right: 15px;
+//   }
+
+//   .btn-out {
+//     margin: 20px;
+//     margin-left: 30px;
+//     width: 109px;
+//     height: 51px;
+//     font-size: 16px;
+//     border-radius: 5px;
+//     background-color: white;
+//     cursor: pointer;
+//   }
+
+//   .btn-out:hover {
+//     background-color: black;
+//     color: white;
+//   }
+
+//   .btn-create {
+//     width: 112.23px;
+//     height: 31.1px;
+//     box-sizing: border-box;
+//     border: 1px solid rgb(82, 196, 26);
+//     background-color: white;
+//     color: rgb(82, 196, 26);
+//     border-radius: 5px;
+//     font-size: 14px;
+//     cursor: pointer;
+//   }
+
+//   .btn-create:hover {
+//     @extend %hover-btn;
+//   }
