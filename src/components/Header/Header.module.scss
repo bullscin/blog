@@ -33,24 +33,17 @@
     transition: all 0.3s;
   }
 
-  h2 {
-    margin-right: auto;
-  }
-  &-btns {
-    display: flex;
-    gap: 19px;
-  }
-
-  .btn-in,
-  .btn-up {
-    width: 109px;
-    height: 51px;
-    color: #000000d9;
-
-    border: none;
+  .btn-create {
+    width: 112.23px;
+    height: 31.1px;
+    box-sizing: border-box;
+    border: 1px solid rgb(82, 196, 26);
+    background-color: white;
+    color: rgb(82, 196, 26);
     border-radius: 5px;
-    background-color: $background-color-item;
-    font-size: 18px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
 
     &:hover {
       @extend %hover-btn;
@@ -64,47 +57,57 @@
       @extend %focus-btn;
     }
   }
+
+  h2 {
+    margin-right: auto;
+  }
+  &-btns {
+    display: flex;
+    align-items: center;
+    gap: 19px;
+  }
+
+  .btn-in,
+  .btn-up,
+  .btn-out {
+    width: 109px;
+    height: 51px;
+    color: #000000d9;
+
+    border: none;
+    border-radius: 5px;
+    background-color: $background-color-item;
+    font-size: 18px;
+
+    cursor: pointer;
+
+    &:hover {
+      @extend %hover-btn;
+    }
+
+    &:active {
+      @extend %active-btn;
+    }
+
+    &:focus {
+      @extend %focus-btn;
+    }
+  }
+  .btn-out {
+    &:hover {
+      background-color: black;
+      color: white;
+    }
+  }
+
+  .name {
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: 0%;
+    text-align: left;
+    margin-left: 30px;
+    margin-right: 15px;
+  }
 }
-
-//   .name {
-//     color: rgba(0, 0, 0, 0.85);
-//     font-size: 18px;
-//     font-weight: 400;
-//     line-height: 28px;
-//     letter-spacing: 0%;
-//     text-align: left;
-//     margin-left: 30px;
-//     margin-right: 15px;
-//   }
-
-//   .btn-out {
-//     margin: 20px;
-//     margin-left: 30px;
-//     width: 109px;
-//     height: 51px;
-//     font-size: 16px;
-//     border-radius: 5px;
-//     background-color: white;
-//     cursor: pointer;
-//   }
-
-//   .btn-out:hover {
-//     background-color: black;
-//     color: white;
-//   }
-
-//   .btn-create {
-//     width: 112.23px;
-//     height: 31.1px;
-//     box-sizing: border-box;
-//     border: 1px solid rgb(82, 196, 26);
-//     background-color: white;
-//     color: rgb(82, 196, 26);
-//     border-radius: 5px;
-//     font-size: 14px;
-//     cursor: pointer;
-//   }
-
-//   .btn-create:hover {
-//     @extend %hover-btn;
-//   }

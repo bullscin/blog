@@ -34,7 +34,7 @@ function Article({ article }) {
         <div className={cl.article__title}>
           <div className={cl["article__title-top"]}>
             <h2>
-              <Link to={`/articles/${slug}`}>
+              <Link to={`blog/articles/${slug}`}>
                 {shortenDescription(title, 40)}
               </Link>
             </h2>

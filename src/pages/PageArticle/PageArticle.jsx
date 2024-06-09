@@ -1,16 +1,16 @@
 /* eslint-disable no-shadow */
 import React, { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import { useDispatch, useSelector } from "react-redux";
 import { Alert, Spin } from "antd";
 // Утилиты
-import { shortenDescription, formattedDate } from "../utilities/utilities";
+import { shortenDescription, formattedDate } from "../../utilities/utilities";
 // Сервер
-import { fetchArticle } from "../service/service";
+import { fetchArticle } from "../../service/service";
 // Картинки
-import notLike from "../icon/notLike.svg";
-import like from "../icon/like.svg";
+import notLike from "../../icon/notLike.svg";
+import like from "../../icon/like.svg";
 // Стили
 import cl from "./PageArticle.module.scss";
 
@@ -82,11 +82,7 @@ function PageArticle() {
       <div className={cl.article__header}>
         <div className={cl.article__title}>
           <div className={cl["article__title-top"]}>
-            <h2>
-              <Link to={`/articles/${slug}`}>
-                {title && shortenDescription(title, 40)}
-              </Link>
-            </h2>
+            <h2>{title && shortenDescription(title, 40)}</h2>
             <div className={cl.article__like}>
               <img
                 className={cl["article__like-icon"]}
