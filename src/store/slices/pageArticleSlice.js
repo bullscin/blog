@@ -1,5 +1,4 @@
 /* eslint-disable no-param-reassign */
-// Библиотеки
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchArticle } from '../../service/service';
 

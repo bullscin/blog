@@ -1,3 +1,5 @@
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable import/no-named-as-default-member */
 // Библиотеки
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -8,6 +10,8 @@ import PageArticle from "../../pages/PageArticle/PageArticle";
 import SignInForm from "../../pages/SignInForm/SignInForm";
 import SignUpForm from "../../pages/SignUpForm/SignUpForm";
 import PageProfile from "../../pages/PageProfile/PageProfile";
+import PageCreateArticle from "../../pages/PageCreateArticle/PageCreateArticle";
+import PageEditArticle from "../../pages/PageEditArticle/PageEditArticle";
 
 export default function BlogApp() {
   return (
@@ -27,10 +31,10 @@ export default function BlogApp() {
           <Route path="profile" element={<PageProfile />} />
 
           {/* Страница создания поста */}
-          {/* <Route path="new-article" element={<авымыв />} /> */}
+          <Route path="new-article" element={<PageCreateArticle />} />
 
-          {/* Страницы редактиварония поста и профиля */}
-          {/* <Route path="articles/:slug/edit" element={<фысыфссысы />} /> */}
+          {/* Страницы редактиварония поста  */}
+          <Route path="articles/:slug/edit" element={<PageEditArticle />} />
 
           {/* Если страница не найдена */}
           <Route path="*" element={<h2>Страница не найдена.</h2>} />

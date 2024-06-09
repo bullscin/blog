@@ -1,9 +1,15 @@
+/* eslint-disable no-console */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 // Библиотеки
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 // Утилиты
 import { shortenDescription, formattedDate } from "../../utilities/utilities";
+
+import { likeArticle, unlikeArticle } from "../../service/service";
 // Картинки
 import notLike from "../../icon/notLike.svg";
 import like from "../../icon/like.svg";
@@ -17,6 +23,7 @@ function generateUniqueId() {
   return idCounter;
 }
 function Article({ article }) {
+  const { jwt } = useSelector((state) => state.user);
   const {
     title,
     description,
@@ -27,6 +34,32 @@ function Article({ article }) {
     favoritesCount,
     slug,
   } = article;
+
+  const [favoriteBool, setFavoriteBool] = useState(favorited);
+  const [countLike, setCountLike] = useState(favoritesCount);
+  useEffect(() => {
+    setFavoriteBool(favorited);
+  }, [favorited]);
+
+  const handleLike = async () => {
+    if (favoriteBool) {
+      try {
+        await unlikeArticle(jwt, slug);
+        setFavoriteBool(false);
+        setCountLike(countLike - 1);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      try {
+        await likeArticle(jwt, slug);
+        setFavoriteBool(true);
+        setCountLike(countLike + 1);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
 
   return (
     <li className={cl.article}>
@@ -41,10 +74,11 @@ function Article({ article }) {
             <div className={cl.article__like}>
               <img
                 className={cl["article__like-icon"]}
-                src={favorited ? like : notLike}
+                src={favoriteBool ? like : notLike}
                 alt="likes"
+                onClick={handleLike}
               />
-              <span>{favoritesCount}</span>
+              <span>{countLike}</span>
             </div>
           </div>
 

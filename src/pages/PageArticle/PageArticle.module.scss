@@ -86,16 +86,15 @@
   }
 
   &__avatar {
-    display: flex;
-    gap: 12px;
-    max-width: 160px;
-    max-height: 100px;
-
     &-container {
       max-width: 110px;
       max-height: 70px;
     }
-
+    .avatar--wrapper {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
     img {
       width: 46px;
       height: 46px;
@@ -142,5 +141,39 @@
   &:hover {
     transition: all 0.3s;
     box-shadow: $shadow-color;
+  }
+}
+.btns--wrapper {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-edit,
+.btn-del {
+  height: 31.1px;
+  border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.btn-edit {
+  width: 65.23px;
+  border: 1px solid rgb(82, 196, 26);
+  color: rgb(82, 196, 26);
+
+  &:hover {
+    background-color: rgb(82, 196, 26);
+    color: white;
+  }
+}
+
+.btn-del {
+  width: 78px;
+  border: 1px solid rgb(245, 34, 45);
+  color: rgb(245, 34, 45);
+
+  &:hover {
+    background-color: rgb(245, 34, 45);
+    color: white;
   }
 }

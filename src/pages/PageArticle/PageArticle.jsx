@@ -1,13 +1,21 @@
+/* eslint-disable no-console */
 /* eslint-disable no-shadow */
-import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import { useDispatch, useSelector } from "react-redux";
-import { Alert, Spin } from "antd";
+import { Alert, Spin, Popconfirm, message } from "antd";
 // Утилиты
 import { shortenDescription, formattedDate } from "../../utilities/utilities";
 // Сервер
-import { fetchArticle } from "../../service/service";
+import {
+  fetchArticle,
+  deleteArticle,
+  likeArticle,
+  unlikeArticle,
+} from "../../service/service";
 // Картинки
 import notLike from "../../icon/notLike.svg";
 import like from "../../icon/like.svg";
@@ -15,25 +23,64 @@ import like from "../../icon/like.svg";
 import cl from "./PageArticle.module.scss";
 
 function PageArticle() {
+  const nav = useNavigate();
   const dispatch = useDispatch();
   const { slug } = useParams();
+  const { jwt } = useSelector((state) => state.user);
 
   const { article, loading, error } = useSelector((state) => state.pageArticle);
   const {
     title,
     description,
     author,
+    favorited,
     createdAt,
     tagList,
-    body,
-    favorited,
     favoritesCount,
+    body,
   } = article || {};
+
+  const [favoriteBool, setFavoriteBool] = useState(favorited);
+  const [countLike, setCountLike] = useState(favoritesCount);
+  async function handleDelete() {
+    try {
+      await deleteArticle(slug, jwt);
+      message.info("Статья удалена");
+      setTimeout(() => nav("/"), 1000);
+    } catch (error) {
+      console.error("Error deleting article:", error);
+      message.error("Ошибка при удаление статьи");
+    }
+  }
 
   useEffect(() => {
     dispatch(fetchArticle(slug));
   }, [slug]);
 
+  const handleLike = async () => {
+    if (favoriteBool) {
+      try {
+        await unlikeArticle(jwt, slug);
+        setFavoriteBool(false);
+        setCountLike(countLike - 1);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      try {
+        await likeArticle(jwt, slug);
+        setFavoriteBool(true);
+        console.log(favoriteBool);
+        setCountLike(countLike + 1);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
+  function cancel() {
+    message.error("Отмена");
+  }
   if (loading && !article) {
     return (
       <div>
@@ -86,10 +133,11 @@ function PageArticle() {
             <div className={cl.article__like}>
               <img
                 className={cl["article__like-icon"]}
-                src={favorited ? like : notLike}
+                src={favoriteBool ? like : notLike}
                 alt="likes"
+                onClick={handleLike}
               />
-              <span>{favoritesCount}</span>
+              <span>{countLike}</span>
             </div>
           </div>
 
@@ -112,11 +160,38 @@ function PageArticle() {
         </div>
 
         <div className={cl.article__avatar}>
-          <span className={cl["article__avatar-container"]}>
-            <span className={cl.article__name}>{author.username}</span>
-            <span className={cl.article__date}>{formattedDate(createdAt)}</span>
-          </span>
-          <img src={author.image} alt="avatar" />
+          <div className={cl["avatar--wrapper"]}>
+            <span className={cl["article__avatar-container"]}>
+              <span className={cl.article__name}>{author.username}</span>
+              <span className={cl.article__date}>
+                {formattedDate(createdAt)}
+              </span>
+            </span>
+            <img src={author.image} alt="avatar" />
+          </div>
+          {/* удаление и редактирование статьи */}
+
+          {author.username === localStorage.getItem("username") ? (
+            <div className={cl["btns--wrapper"]}>
+              <Popconfirm
+                title="Вы уверены, что хотите удалить?"
+                onConfirm={handleDelete} // eslint-disable-line
+                onCancel={cancel} // eslint-disable-line
+                okText="ДА"
+                cancelText="НЕТ"
+                placement="bottom"
+              >
+                <button type="button" className={cl["btn-del"]}>
+                  DELETE
+                </button>
+              </Popconfirm>
+              <Link to={`/articles/${slug}/edit`}>
+                <button type="button" className={cl["btn-edit"]}>
+                  EDIT
+                </button>
+              </Link>
+            </div>
+          ) : null}
         </div>
       </div>
 

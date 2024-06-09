@@ -1,15 +1,42 @@
+/* eslint-disable consistent-return */
 // Библиотеки
 import { format } from 'date-fns';
+import { message } from 'antd';
+
 // Дефолтные функции
-const shortenDescription = (str, num) => {
-  if (str.length <= num) {
-    return str;
+const shortenDescription = (text, maxLength) => {
+  if (typeof text !== 'string') {
+    return '';
   }
-  return `${str.slice(0, num)}...`;
+  if (text.length <= maxLength) {
+    return text;
+  }
+  return `${text.substring(0, maxLength)}...`;
 };
 
 const formattedDate = (date) =>
   date ? format(new Date(date), 'MMM dd, yyyy') : '';
+
+function validateAndTrimData(data) {
+  const trimmedData = {
+    ...data,
+    title: data.title.trim(),
+    description: data.description.trim(),
+    body: data.body.trim(),
+    tags: data.tags.map((tag) => (typeof tag === 'string' ? tag.trim() : tag)),
+  };
+
+  if (
+    !/^(?![\s\n]*$).+/.test(trimmedData.title) ||
+    !/^(?![\s\n]*$).+/.test(trimmedData.body) ||
+    !/^(?![\s\n]*$).+/.test(trimmedData.description)
+  ) {
+    message.error('Data cannot be empty or contain only spaces');
+    return;
+  }
+
+  return trimmedData;
+}
 // Методы валидации
 const validationMethods = {
   validateUsername: (value) => {
@@ -55,6 +82,31 @@ const validationMethods = {
     }
     return true;
   },
+
+  validateCheckbox: (value) => value === true, // Проверяет, что значение чекбокса равно true (отмечен)
+  validateTitle: (value) => {
+    if (!value) {
+      return 'Заголовок обязателен';
+    }
+    return true;
+  },
+  validateDescription: (value) => {
+    if (!value) {
+      return 'Краткое описание обязательно';
+    }
+    return true;
+  },
+  validateBody: (value) => {
+    if (!value) {
+      return 'Текст обязателен';
+    }
+    return true;
+  },
 };
 
-export { shortenDescription, formattedDate, validationMethods };
+export {
+  shortenDescription,
+  formattedDate,
+  validateAndTrimData,
+  validationMethods,
+};

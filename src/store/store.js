@@ -1,3 +1,5 @@
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable import/no-named-as-default-member */
 import { configureStore } from '@reduxjs/toolkit';
 import articlesReducer from './slices/articlesSlice';
 import pageArticleReducer from './slices/pageArticleSlice';
