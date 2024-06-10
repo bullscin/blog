@@ -44,9 +44,20 @@ function PageArticle() {
   const [favoriteBool, setFavoriteBool] = useState(favorited);
   const [countLike, setCountLike] = useState(favoritesCount);
 
+  // useEffect(() => {
+  //   dispatch(fetchArticle(slug, jwt));
+  // }, []);
+
   useEffect(() => {
     dispatch(fetchArticle(slug, jwt));
-  }, []);
+  }, [dispatch, slug, jwt]);
+
+  useEffect(() => {
+    if (article) {
+      setFavoriteBool(favorited);
+      setCountLike(favoritesCount);
+    }
+  }, [article, favorited, favoritesCount]);
 
   const handleLike = async () => {
     if (favoriteBool) {
