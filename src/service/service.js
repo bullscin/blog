@@ -27,11 +27,20 @@ const handleFetchError = (error) => {
 // Функция для запроса на получения всех постов
 const fetchAllArticles = createAsyncThunk(
   'articles/fetchAllArticles',
-  async (page = 1, { rejectWithValue }) => {
+  async (payload, { rejectWithValue, getState }) => {
+    const { page = 1 } = payload;
+    const { jwt } = getState().user; // Или где у вас хранится jwt
+    // console.log(jwt);
     try {
       const response = await fetch(
         `${BASE_URL}articles?limit=10&offset=${(page - 1) * 10}`,
+        {
+          headers: {
+            Authorization: `Token ${jwt}`,
+          },
+        },
       );
+
       const data = await response.json();
       localStorage.setItem('articles', JSON.stringify(data.articles));
       return { articles: data.articles, total: data.articlesCount };
@@ -41,13 +50,17 @@ const fetchAllArticles = createAsyncThunk(
     }
   },
 );
-
 // Функция для запроса на получения конкретного поста
 const fetchArticle = createAsyncThunk(
   'articles/fetchArticle',
-  async (slug, { rejectWithValue }) => {
+  async (slug, { rejectWithValue, getState }) => {
+    const { jwt } = getState().user;
     try {
-      const response = await fetch(`${BASE_URL}articles/${slug}`);
+      const response = await fetch(`${BASE_URL}articles/${slug}`, {
+        headers: {
+          Authorization: `Token ${jwt}`,
+        },
+      });
       const data = await response.json();
       return data;
     } catch (error) {

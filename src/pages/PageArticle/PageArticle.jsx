@@ -29,7 +29,6 @@ function PageArticle() {
   const { jwt } = useSelector((state) => state.user);
 
   const { article, loading, error } = useSelector((state) => state.pageArticle);
-  // console.log(article);
   const {
     title,
     description,
@@ -40,13 +39,14 @@ function PageArticle() {
     favoritesCount,
     body,
   } = article || {};
+  console.log(favoritesCount);
 
-  const [countLike, setCountLike] = useState(favoritesCount);
   const [favoriteBool, setFavoriteBool] = useState(favorited);
+  const [countLike, setCountLike] = useState(favoritesCount);
 
   useEffect(() => {
-    dispatch(fetchArticle(slug));
-  }, [slug]);
+    dispatch(fetchArticle(slug, jwt));
+  }, []);
 
   const handleLike = async () => {
     if (favoriteBool) {
@@ -125,7 +125,7 @@ function PageArticle() {
       </div>
     );
 
-  return (
+  return favoritesCount ? (
     <article className={cl.article}>
       <div className={cl.article__header}>
         <div className={cl.article__title}>
@@ -201,6 +201,8 @@ function PageArticle() {
       </p>
       <ReactMarkdown>{body}</ReactMarkdown>
     </article>
+  ) : (
+    <p>...Loading</p>
   );
 }
 

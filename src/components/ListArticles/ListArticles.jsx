@@ -17,11 +17,13 @@ export default function ListArticles() {
     (state) => state.articles,
   );
 
+  const { jwt } = useSelector((state) => state.user);
+
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    dispatch(fetchAllArticles(currentPage));
-  }, [dispatch, currentPage]);
+    dispatch(fetchAllArticles(currentPage, jwt));
+  }, [dispatch, currentPage, jwt]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
