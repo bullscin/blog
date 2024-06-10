@@ -1,8 +1,10 @@
+/* eslint-disable no-debugger */
 /* eslint-disable no-console */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 // Библиотеки
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+// import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
@@ -37,9 +39,10 @@ function Article({ article }) {
 
   const [favoriteBool, setFavoriteBool] = useState(favorited);
   const [countLike, setCountLike] = useState(favoritesCount);
-  useEffect(() => {
-    setFavoriteBool(favorited);
-  }, [favorited]);
+
+  // useEffect(() => {
+  //   setFavoriteBool(favorited);
+  // }, []);
 
   const handleLike = async () => {
     if (favoriteBool) {
