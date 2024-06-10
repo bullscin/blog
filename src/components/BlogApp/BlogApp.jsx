@@ -1,8 +1,6 @@
-/* eslint-disable import/no-named-as-default */
-/* eslint-disable import/no-named-as-default-member */
-// Библиотеки
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 // Компоненты
 import MainLayout from "../MainLayout/MainLayout";
 import ListArticles from "../ListArticles/ListArticles";
@@ -27,13 +25,13 @@ export default function BlogApp() {
           <Route path="sign-in" element={<SignInForm />} />
           <Route path="sign-up" element={<SignUpForm />} />
 
-          {/* Страница редактиварония профиля */}
+          {/* Страница редактивания профиля */}
           <Route path="profile" element={<PageProfile />} />
 
           {/* Страница создания поста */}
           <Route path="new-article" element={<PageCreateArticle />} />
 
-          {/* Страницы редактиварония поста  */}
+          {/* Страницы редактивания поста */}
           <Route path="articles/:slug/edit" element={<PageEditArticle />} />
 
           {/* Если страница не найдена */}

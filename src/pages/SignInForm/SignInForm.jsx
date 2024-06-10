@@ -26,7 +26,6 @@ function SignInForm() {
   const onSubmit = async (data) => {
     try {
       const loginAction = await dispatch(loginUser(data));
-      console.log(loginAction.payload);
       if (loginAction.payload && loginAction.payload.token) {
         const { token, username, email, image } = loginAction.payload;
         // Сохранение данных в localStorage

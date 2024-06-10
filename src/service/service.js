@@ -29,8 +29,8 @@ const fetchAllArticles = createAsyncThunk(
   'articles/fetchAllArticles',
   async (payload, { rejectWithValue, getState }) => {
     const { page = 1 } = payload;
-    const { jwt } = getState().user; // Или где у вас хранится jwt
-    // console.log(jwt);
+    const { jwt } = getState().user;
+
     try {
       const response = await fetch(
         `${BASE_URL}articles?limit=10&offset=${(page - 1) * 10}`,
@@ -42,7 +42,7 @@ const fetchAllArticles = createAsyncThunk(
       );
 
       const data = await response.json();
-      localStorage.setItem('articles', JSON.stringify(data.articles));
+      // localStorage.setItem('articles', JSON.stringify(data.articles));
       return { articles: data.articles, total: data.articlesCount };
     } catch (error) {
       const customError = handleFetchError(error);
