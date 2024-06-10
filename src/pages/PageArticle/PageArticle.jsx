@@ -29,6 +29,7 @@ function PageArticle() {
   const { jwt } = useSelector((state) => state.user);
 
   const { article, loading, error } = useSelector((state) => state.pageArticle);
+  // console.log(article);
   const {
     title,
     description,
@@ -40,18 +41,8 @@ function PageArticle() {
     body,
   } = article || {};
 
-  const [favoriteBool, setFavoriteBool] = useState(favorited);
   const [countLike, setCountLike] = useState(favoritesCount);
-  async function handleDelete() {
-    try {
-      await deleteArticle(slug, jwt);
-      message.info("Статья удалена");
-      setTimeout(() => nav("/"), 1000);
-    } catch (error) {
-      console.error("Error deleting article:", error);
-      message.error("Ошибка при удаление статьи");
-    }
-  }
+  const [favoriteBool, setFavoriteBool] = useState(favorited);
 
   useEffect(() => {
     dispatch(fetchArticle(slug));
@@ -70,13 +61,23 @@ function PageArticle() {
       try {
         await likeArticle(jwt, slug);
         setFavoriteBool(true);
-        console.log(favoriteBool);
         setCountLike(countLike + 1);
       } catch (error) {
         console.error(error);
       }
     }
   };
+
+  async function handleDelete() {
+    try {
+      await deleteArticle(slug, jwt);
+      message.info("Статья удалена");
+      setTimeout(() => nav("/"), 1000);
+    } catch (error) {
+      console.error("Error deleting article:", error);
+      message.error("Ошибка при удаление статьи");
+    }
+  }
 
   function cancel() {
     message.error("Отмена");
