@@ -1,7 +1,11 @@
 /* eslint-disable no-param-reassign */
 // Библиотеки
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { registerUserService, loginUserService } from '../../service/service';
+import {
+  registerUserService,
+  loginUserService,
+  getUserData,
+} from '../../service/service';
 // Определяем асинхронное действие для регистрации пользователя
 export const registerUser = createAsyncThunk(
   'user/registerUser',
@@ -30,10 +34,10 @@ export const loginUser = createAsyncThunk(
 const userSlice = createSlice({
   name: 'user',
   initialState: {
-    jwt: localStorage.getItem('token') ?? null,
-    username: localStorage.getItem('username') ?? '',
-    email: localStorage.getItem('email') ?? '',
-    image: localStorage.getItem('image') ?? '',
+    jwt: null,
+    username: '',
+    email: '',
+    image: '',
     error: null,
   },
   reducers: {
@@ -60,6 +64,7 @@ const userSlice = createSlice({
     // Обрабатываем успешное выполнение действия входа
     builder.addCase(loginUser.fulfilled, (state, action) => {
       state.error = null;
+      console.log(action);
       state.jwt = action.payload.token;
       state.username = action.payload.username;
       state.email = action.payload.email;
@@ -67,6 +72,13 @@ const userSlice = createSlice({
     });
     builder.addCase(loginUser.rejected, (state, action) => {
       state.error = action.payload;
+    });
+    // Подтягиваем данные пользователя
+    builder.addCase(getUserData.fulfilled, (state, action) => {
+      const { username, email, image } = action.payload;
+      state.username = username;
+      state.email = email;
+      state.image = image;
     });
   },
 });

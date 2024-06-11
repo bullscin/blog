@@ -69,6 +69,23 @@ const fetchArticle = createAsyncThunk(
     }
   },
 );
+// Функция для получения данных пользователя по токену
+const getUserData = createAsyncThunk(
+  'user/getUserData',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`${BASE_URL}user`, {
+        headers: {
+          Authorization: `Token ${localStorage.getItem('token')}`,
+        },
+      });
+      const data = await response.json();
+      return data.user;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
 
 // Функция для регистрации (POST запрос)
 const registerUserService = async (user) => {
@@ -107,9 +124,9 @@ const loginUserService = async (user) => {
     }
 
     localStorage.setItem('token', data.user.token);
-    localStorage.setItem('username', data.user.username);
-    localStorage.setItem('email', data.user.email);
-    localStorage.setItem('image', data.user.image);
+    // localStorage.setItem('username', data.user.username);
+    // localStorage.setItem('email', data.user.email);
+    // localStorage.setItem('image', data.user.image);
 
     return data.user;
   } catch (error) {
@@ -285,4 +302,5 @@ export {
   updateArticle,
   likeArticle,
   unlikeArticle,
+  getUserData,
 };

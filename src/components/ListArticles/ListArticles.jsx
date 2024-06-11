@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Alert, Spin, Pagination } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 // Сервер
-import { fetchAllArticles } from "../../service/service";
+import { fetchAllArticles, getUserData } from "../../service/service";
 // Компоненты
 import Article from "../Article/Article";
 // Стили
@@ -17,13 +17,19 @@ export default function ListArticles() {
     (state) => state.articles,
   );
 
-  const { jwt } = useSelector((state) => state.user);
+  const { jwt, username } = useSelector((state) => state.user);
 
   const [currentPage, setCurrentPage] = useState(1);
-  // console.log(currentPage);
   useEffect(() => {
     dispatch(fetchAllArticles({ page: currentPage }, jwt));
   }, [dispatch, currentPage, jwt]);
+
+  useEffect(() => {
+    // Вызываем getUserData только если пользователь аутентифицирован
+    if (jwt && !username) {
+      dispatch(getUserData());
+    }
+  }, [dispatch, jwt, username]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);

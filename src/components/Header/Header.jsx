@@ -15,9 +15,9 @@ export default function Header() {
   const handleLogOut = (e) => {
     e.preventDefault();
     localStorage.removeItem("token");
-    localStorage.removeItem("username");
-    localStorage.removeItem("email");
-    localStorage.removeItem("image");
+    // localStorage.removeItem("username");
+    // localStorage.removeItem("email");
+    // localStorage.removeItem("image");
     dispatch(setAuth({ token: "", username: "", email: "", image: "" }));
     nav("sign-in");
   };

@@ -26,7 +26,7 @@ function PageArticle() {
   const nav = useNavigate();
   const dispatch = useDispatch();
   const { slug } = useParams();
-  const { jwt } = useSelector((state) => state.user);
+  const { jwt, username } = useSelector((state) => state.user);
 
   const { article, loading, error } = useSelector((state) => state.pageArticle);
   const {
@@ -178,7 +178,7 @@ function PageArticle() {
           </div>
           {/* удаление и редактирование статьи */}
 
-          {author.username === localStorage.getItem("username") ? (
+          {author.username === username ? (
             <div className={cl["btns--wrapper"]}>
               <Popconfirm
                 title="Вы уверены, что хотите удалить?"

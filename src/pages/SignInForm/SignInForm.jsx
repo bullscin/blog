@@ -30,9 +30,9 @@ function SignInForm() {
         const { token, username, email, image } = loginAction.payload;
         // Сохранение данных в localStorage
         localStorage.setItem("token", token);
-        localStorage.setItem("username", username);
-        localStorage.setItem("email", email);
-        localStorage.setItem("image", image);
+        // localStorage.setItem("username", username);
+        // localStorage.setItem("email", email);
+        // localStorage.setItem("image", image);
 
         // Обновление состояния Redux
         dispatch(setAuth({ token, username, email, image }));
