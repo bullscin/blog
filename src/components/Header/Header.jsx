@@ -25,7 +25,7 @@ export default function Header() {
   return (
     <header className={cl.header}>
       <h2>
-        <Link to="/">RealWorld Blog</Link>
+        <Link to="/blog/articles">RealWorld Blog</Link>
       </h2>
 
       <div className={cl["header-btns"]}>

@@ -15,11 +15,14 @@ export default function BlogApp() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MainLayout />}>
+        <Route path="/blog" element={<MainLayout />}>
           {/* Страница со списоком постов-главная и страница поста */}
           <Route index element={<ListArticles />} />
-          <Route path="blog" element={<ListArticles />} />
-          <Route path="blog/articles/:slug" element={<PageArticle />} />
+          <Route path="blog/articles" element={<ListArticles />} />
+          <Route path="articles/:slug" element={<PageArticle />} />
+
+          <Route path="articles" element={<ListArticles />} />
+          <Route path="articles/:slug" element={<PageArticle />} />
 
           {/* Страницы входа и регистрации */}
           <Route path="sign-in" element={<SignInForm />} />

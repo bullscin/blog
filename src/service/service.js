@@ -30,7 +30,6 @@ const fetchAllArticles = createAsyncThunk(
   async (payload, { rejectWithValue, getState }) => {
     const { page = 1 } = payload;
     const { jwt } = getState().user;
-    console.log(page, 'service');
 
     try {
       const response = await fetch(
@@ -86,6 +85,7 @@ const registerUserService = async (user) => {
     return data;
   } catch (error) {
     const customError = handleFetchError(error);
+    console.log(customError);
     return customError;
   }
 };
