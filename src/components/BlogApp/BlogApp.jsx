@@ -23,6 +23,8 @@ export default function BlogApp() {
 
           <Route path="articles" element={<ListArticles />} />
           <Route path="articles/:slug" element={<PageArticle />} />
+          {/* Страницы редактивания поста */}
+          <Route path="articles/:slug/edit" element={<PageEditArticle />} />
 
           {/* Страницы входа и регистрации */}
           <Route path="sign-in" element={<SignInForm />} />
@@ -33,9 +35,6 @@ export default function BlogApp() {
 
           {/* Страница создания поста */}
           <Route path="new-article" element={<PageCreateArticle />} />
-
-          {/* Страницы редактивания поста */}
-          <Route path="articles/:slug/edit" element={<PageEditArticle />} />
 
           {/* Если страница не найдена */}
           <Route path="*" element={<h2>Страница не найдена.</h2>} />

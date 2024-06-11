@@ -78,7 +78,7 @@ function PageArticle() {
     try {
       await deleteArticle(slug, jwt);
       message.info("Статья удалена");
-      setTimeout(() => nav("/"), 1000);
+      setTimeout(() => nav("/blog"), 1000);
     } catch (error) {
       console.error("Error deleting article:", error);
       message.error("Ошибка при удаление статьи");
@@ -192,7 +192,7 @@ function PageArticle() {
                   DELETE
                 </button>
               </Popconfirm>
-              <Link to={`/articles/${slug}/edit`}>
+              <Link to={`/blog/articles/${slug}/edit`}>
                 <button type="button" className={cl["btn-edit"]}>
                   EDIT
                 </button>

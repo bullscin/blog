@@ -83,7 +83,12 @@ const validationMethods = {
     return true;
   },
 
-  validateCheckbox: (value) => value === true, // Проверяет, что значение чекбокса равно true (отмечен)
+  validateCheckbox: (value) => {
+    if (value === false) {
+      return 'Click me!';
+    }
+    return true;
+  }, // Проверяет, что значение чекбокса равно true (отмечен)
   validateTitle: (value) => {
     if (!value) {
       return 'Заголовок обязателен';

@@ -32,7 +32,7 @@ function PageEditArticle() {
     register,
     control,
     handleSubmit,
-    // reset,
+    reset,
     formState: { errors },
   } = useForm();
   const { fields, append, remove } = useFieldArray({
@@ -53,8 +53,8 @@ function PageEditArticle() {
       const articleData = validateAndTrimData(data);
       await updateArticle(articleData, jwt, slug);
       message.info("Article added");
-      // setTimeout(() => reset(), 1000);
-      nav("/blog");
+      setTimeout(() => reset(), 1000);
+      nav("/blog/");
     } catch (error) {
       console.error("Error creating article:", error);
       message.error("Failed to add article");
