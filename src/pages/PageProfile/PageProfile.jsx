@@ -28,7 +28,7 @@ function PageProfile() {
       await updateUserProfile(data, jwt);
       reset();
       message.info("Профиль обновлён");
-      nav("/");
+      nav("/blog/");
     } catch (error) {
       console.error("Error profile not updated:", error);
       message.error("Профиль не обновлён");

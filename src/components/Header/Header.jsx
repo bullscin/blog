@@ -19,7 +19,7 @@ export default function Header() {
     localStorage.removeItem("email");
     localStorage.removeItem("image");
     dispatch(setAuth({ token: "", username: "", email: "", image: "" }));
-    nav("/sign-in");
+    nav("sign-in");
   };
 
   return (
@@ -31,15 +31,15 @@ export default function Header() {
       <div className={cl["header-btns"]}>
         {jwt ? (
           <>
-            <Link to="/new-article">
+            <Link to="new-article">
               <button type="button" className={cl["btn-create"]}>
                 create article
               </button>
             </Link>
-            <Link to="/profile">
+            <Link to="profile">
               <span className={cl.name}>{username}</span>
             </Link>
-            <Link to="/profile">
+            <Link to="profile">
               <img
                 style={{ width: "46px", height: "46px", borderRadius: "50%" }}
                 src="https://static.productionready.io/images/smiley-cyrus.jpg"
@@ -62,7 +62,7 @@ export default function Header() {
               </button>
             </Link>
 
-            <Link to="/sign-up">
+            <Link to="sign-up">
               <button type="button" className={cl["btn-up"]}>
                 Sign Up
               </button>

@@ -46,7 +46,7 @@ function PageCreateArticle() {
       await postArticle(articleData, jwt);
       message.info("Article added");
       setTimeout(() => reset(), 1000);
-      nav("/");
+      nav("/blog");
     } catch (error) {
       console.error("Error creating article:", error);
       message.error("Failed to add article");

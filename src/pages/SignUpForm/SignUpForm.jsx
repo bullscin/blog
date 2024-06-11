@@ -28,7 +28,7 @@ function SignUpForm() {
     await dispatch(registerUser(data))
       .then(() => {
         message.info("Вы успешно создали аккаунт");
-        nav("/sign-in");
+        nav("/blog/sign-in");
       })
       .catch((error) => {
         console.error("Error during registration: ", error);
@@ -145,7 +145,7 @@ function SignUpForm() {
         {/* <span className="error">{errorMessage}</span> */}
 
         <p className={cl["sign-up-form__already"]}>
-          Already have an account? <Link to="/sign-in">Sign In.</Link>
+          Already have an account? <Link to="/blog/sign-in">Sign In.</Link>
         </p>
       </form>
     </div>

@@ -39,7 +39,7 @@ function SignInForm() {
 
         // Перенаправление пользователя
         message.success("Вы успешно вошли");
-        nav("/");
+        nav("/blog/");
       } else {
         // Ошибка входа
         message.error("Ошибка входа. Проверьте правильность введенных данных");
@@ -97,7 +97,7 @@ function SignInForm() {
         <button type="submit">Login</button>
 
         <p className={cl["sign-up-form__already"]}>
-          Don’t have an account? <Link to="/sign-up">Sign Up.</Link>
+          Don’t have an account? <Link to="/blog/sign-up">Sign Up.</Link>
         </p>
       </form>
     </div>
