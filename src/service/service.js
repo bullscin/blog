@@ -42,7 +42,6 @@ const fetchAllArticles = createAsyncThunk(
       );
 
       const data = await response.json();
-      // localStorage.setItem('articles', JSON.stringify(data.articles));
       return { articles: data.articles, total: data.articlesCount };
     } catch (error) {
       const customError = handleFetchError(error);
@@ -69,14 +68,16 @@ const fetchArticle = createAsyncThunk(
     }
   },
 );
+
 // Функция для получения данных пользователя по токену
-const getUserData = createAsyncThunk(
-  'user/getUserData',
-  async (_, { rejectWithValue }) => {
+const fetchUserData = createAsyncThunk(
+  'user/fetchUserData',
+  async (_, { rejectWithValue, getState }) => {
+    const token = getState().user.jwt || localStorage.getItem('token');
     try {
       const response = await fetch(`${BASE_URL}user`, {
         headers: {
-          Authorization: `Token ${localStorage.getItem('token')}`,
+          Authorization: `Token ${token}`,
         },
       });
       const data = await response.json();
@@ -86,7 +87,6 @@ const getUserData = createAsyncThunk(
     }
   },
 );
-
 // Функция для регистрации (POST запрос)
 const registerUserService = async (user) => {
   try {
@@ -293,6 +293,7 @@ const unlikeArticle = async (jwt, slug) => {
 export {
   fetchAllArticles,
   fetchArticle,
+  fetchUserData,
   handleFetchError,
   loginUserService,
   registerUserService,
@@ -302,5 +303,4 @@ export {
   updateArticle,
   likeArticle,
   unlikeArticle,
-  getUserData,
 };

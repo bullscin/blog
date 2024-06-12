@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { fetchUserData } from "../../service/service";
 // Компоненты
 import MainLayout from "../MainLayout/MainLayout";
 import ListArticles from "../ListArticles/ListArticles";
@@ -12,6 +13,15 @@ import PageCreateArticle from "../../pages/PageCreateArticle/PageCreateArticle";
 import PageEditArticle from "../../pages/PageEditArticle/PageEditArticle";
 
 export default function BlogApp() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      dispatch(fetchUserData());
+    }
+  }, [dispatch]);
+
   return (
     <BrowserRouter>
       <Routes>

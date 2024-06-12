@@ -1,9 +1,11 @@
 // Библиотеки
+// import React from "react";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // Store-slices
 import { setAuth } from "../../store/slices/userSlice";
+
 // Стили
 import cl from "./Header.module.scss";
 
@@ -15,9 +17,6 @@ export default function Header() {
   const handleLogOut = (e) => {
     e.preventDefault();
     localStorage.removeItem("token");
-    // localStorage.removeItem("username");
-    // localStorage.removeItem("email");
-    // localStorage.removeItem("image");
     dispatch(setAuth({ token: "", username: "", email: "", image: "" }));
     nav("sign-in");
   };

@@ -4,8 +4,9 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
   registerUserService,
   loginUserService,
-  getUserData,
+  fetchUserData,
 } from '../../service/service';
+
 // Определяем асинхронное действие для регистрации пользователя
 export const registerUser = createAsyncThunk(
   'user/registerUser',
@@ -18,6 +19,7 @@ export const registerUser = createAsyncThunk(
     }
   },
 );
+
 // Определяем асинхронное действие для входа пользователя
 export const loginUser = createAsyncThunk(
   'user/loginUser',
@@ -34,7 +36,7 @@ export const loginUser = createAsyncThunk(
 const userSlice = createSlice({
   name: 'user',
   initialState: {
-    jwt: null,
+    jwt: localStorage.getItem('token') || null,
     username: '',
     email: '',
     image: '',
@@ -57,6 +59,7 @@ const userSlice = createSlice({
       state.username = action.payload.username;
       state.email = action.payload.email;
       state.image = action.payload.image;
+      localStorage.setItem('token', action.payload.token);
     });
     builder.addCase(registerUser.rejected, (state, action) => {
       state.error = action.payload;
@@ -64,17 +67,17 @@ const userSlice = createSlice({
     // Обрабатываем успешное выполнение действия входа
     builder.addCase(loginUser.fulfilled, (state, action) => {
       state.error = null;
-      console.log(action);
       state.jwt = action.payload.token;
       state.username = action.payload.username;
       state.email = action.payload.email;
       state.image = action.payload.image;
+      localStorage.setItem('token', action.payload.token);
     });
     builder.addCase(loginUser.rejected, (state, action) => {
       state.error = action.payload;
     });
     // Подтягиваем данные пользователя
-    builder.addCase(getUserData.fulfilled, (state, action) => {
+    builder.addCase(fetchUserData.fulfilled, (state, action) => {
       const { username, email, image } = action.payload;
       state.username = username;
       state.email = email;

@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Alert, Spin, Pagination } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 // Сервер
-import { fetchAllArticles, getUserData } from "../../service/service";
+import { fetchAllArticles, fetchUserData } from "../../service/service";
 // Компоненты
 import Article from "../Article/Article";
 // Стили
@@ -25,9 +25,9 @@ export default function ListArticles() {
   }, [dispatch, currentPage, jwt]);
 
   useEffect(() => {
-    // Вызываем getUserData только если пользователь аутентифицирован
+    // Вызываем  только если пользователь аутентифицирован
     if (jwt && !username) {
-      dispatch(getUserData());
+      dispatch(fetchUserData());
     }
   }, [dispatch, jwt, username]);
 
