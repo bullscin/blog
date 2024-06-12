@@ -17,7 +17,7 @@ export default function ListArticles() {
     (state) => state.articles,
   );
 
-  const { jwt, username } = useSelector((state) => state.user);
+  const { jwt } = useSelector((state) => state.user);
 
   const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
@@ -26,10 +26,10 @@ export default function ListArticles() {
 
   useEffect(() => {
     // Вызываем  только если пользователь аутентифицирован
-    if (jwt && !username) {
+    if (jwt) {
       dispatch(fetchUserData());
     }
-  }, [dispatch, jwt, username]);
+  }, []);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);

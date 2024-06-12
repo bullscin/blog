@@ -26,6 +26,7 @@ function PageProfile() {
   const onSubmit = async (data) => {
     try {
       await updateUserProfile(data, jwt);
+
       reset();
       message.info("Профиль обновлён");
       nav("/blog/");
